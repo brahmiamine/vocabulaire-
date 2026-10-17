@@ -6,11 +6,11 @@ import {
   MessageCircle, Lightbulb, BookMarked, Menu, Eye, Keyboard, Mic, MicOff, RotateCcw,
   CircleCheckBig, CircleHelp, Play, Wifi, ShieldCheck, Info
 } from 'lucide-react'
-import { makeWord, schedule, today, normalize, isDue, newId, speak, streak } from './learning.js'
+import { makeWord, schedule, today, normalize, isDue, newId, speak, streak } from '../learning.js'
 import {
   supabase, localWords, localReviews, storeLocal, getCloudData, putWord, putReview,
   addStarter, download, parseImport, mergeWords, toCsv
-} from './data.js'
+} from '../data.js'
 import { Button, WordSpeaker, Empty, ratings, categories, fmt, dayKey, countToday } from '../components/Common.jsx'
 export function Review({due,all,reviews,onRate,onTab}) {
   const [show,setShow]=useState(false)
