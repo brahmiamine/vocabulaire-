@@ -446,3 +446,21 @@ main {width:100%;max-width:1440px;margin:0 auto;flex:1}
 .history-widget-pager button:disabled{opacity:.35}.history-widget-pager span{font-size:12px;color:#758677}
 .history-widget-note{font-size:11px;color:#87988c;line-height:1.5;margin:15px 0}
 @media(max-width:610px){.history-launch{padding:11px;gap:6px}.history-launch button{font-size:11px;max-width:112px}.history-widget-head h2{font-size:22px}.history-widget-head p{font-size:12px}.history-widget-head>strong{font-size:21px;min-width:50px;padding:11px}.history-widget-cta{flex-direction:column;align-items:stretch}.history-widget-filters select{width:112px}.history-widget-item summary{padding:9px 11px}}
+
+/* Guest-first home: open vocabulary directly, no account required. */
+.hero-oral-link{display:block;margin:12px 0 0;padding:6px 0;border:0;background:transparent;color:#dcf2d7;font-weight:800;font-size:12px;text-align:left;cursor:pointer}
+.hero-oral-link:focus-visible{outline:2px solid #dcf39b;outline-offset:4px}
+.library-pagination{display:flex;align-items:center;justify-content:center;gap:14px;padding:19px 0}
+.library-pagination button{border:1px solid #d7e5d8;background:#fff;border-radius:9px;color:#376044;font-size:12px;font-weight:800;padding:10px 14px}
+.library-pagination button:disabled{opacity:.4}.library-pagination span{font-size:12px;color:#647d69}
+@media(max-width:610px){
+  .hero{display:block;min-height:0;border-radius:18px}
+  .hero::before{display:none}
+  .hero-visual{display:none}
+  .hero-copy{padding:23px 21px}
+  .hero h1{max-width:none;font-size:29px;margin:12px 0 10px}
+  .hero p{padding:0;max-width:none;font-size:12px;line-height:1.6;margin:0 0 15px}
+  .hero .btn.lime{width:100%;justify-content:center;min-height:46px;padding:11px 12px}
+  .hero-oral-link{margin:7px 0 0;font-size:12px}
+  .library-pagination{padding:15px 0}
+}
