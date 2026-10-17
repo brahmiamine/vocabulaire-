@@ -412,3 +412,37 @@ main {width:100%;max-width:1440px;margin:0 auto;flex:1}
  .stat-card{min-height:121px}
  .section-head{margin-top:23px}
 }
+
+
+/* October history catalog: compact eight-row mobile experience. */
+.history-launch{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px;margin:12px 0 15px;background:#eaf3e6;border:1px solid #d6e8d0;border-radius:13px}
+.history-launch div{display:grid;gap:4px}.history-launch strong{font-size:13px;color:#305b3c}.history-launch small{font-size:11px;color:#6e866f}
+.history-launch button,.history-widget-cta button{display:flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:9px;background:#306746;color:#fff;padding:11px 13px;font-size:12px;font-weight:800;cursor:pointer}
+.history-launch button:disabled,.history-widget-cta button:disabled{opacity:.45}
+.history-widget{max-width:810px;margin:0 auto}.history-widget-top{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#789080;font-size:11px}
+.history-widget-top button{border:0;background:none;color:#51755e;display:flex;align-items:center;gap:6px;font-size:12px;padding:6px 0}
+.history-widget-head{display:flex;justify-content:space-between;align-items:center;gap:20px;margin:12px 0 20px}
+.history-widget-head h2{font-size:29px;letter-spacing:-.8px;margin:0 0 7px;color:#27452f}
+.history-widget-head p{font-size:13px;line-height:1.6;color:#758b7a;max-width:510px;margin:0}
+.history-widget-head>strong{background:#e7f0e3;border-radius:16px;color:#346747;padding:14px;font-size:27px;min-width:68px;text-align:center}
+.history-widget-head>strong small{display:block;font-size:10px;color:#78947c}
+.history-widget-cta{background:#f2f7ee;border:1px solid #dce9d6;border-radius:12px;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;gap:9px;margin-bottom:12px}
+.history-widget-cta div strong{display:block;font-size:14px;color:#315c3e}.history-widget-cta small{font-size:11px;color:#809080}
+.history-widget-filters{display:flex;gap:8px}.history-widget-filters label{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:white;padding:0 11px;border:1px solid #dce8db;border-radius:10px}
+.history-widget-filters input{min-width:0;width:100%;background:transparent;border:0;outline:0;padding:12px 0;font-size:13px}
+.history-widget-filters select{width:160px;min-width:0;border:1px solid #dce8db;background:white;border-radius:10px;padding:8px;font-size:12px}
+.history-widget-results{font-size:11px;color:#809284;margin:10px 0}
+.history-widget-item{background:white;border:1px solid #e4ece2;border-radius:10px;margin-bottom:6px;overflow:hidden}
+.history-widget-item summary{display:flex;align-items:center;gap:10px;min-height:47px;padding:10px 13px;list-style:none;cursor:pointer}
+.history-widget-item summary::-webkit-details-marker{display:none}
+.history-widget-item summary>div{flex:1}.history-widget-item summary strong{display:block;color:#345840;font-size:14px}
+.history-widget-item summary small{font-size:10px;color:#8ca092}.history-widget-item summary svg{color:#4f9566}
+.history-widget-detail{border-top:1px solid #edf2ec;padding:10px 14px 14px;font-size:13px;color:#536d5a}
+.history-widget-detail p{line-height:1.5;margin:4px 0 11px}.history-widget-detail p[lang=ar]{font-size:17px}
+.history-widget-detail blockquote{background:#f5f9f2;margin:8px 0;padding:8px 11px;border-left:3px solid #a6c9a2}
+.history-widget-detail button{display:flex;align-items:center;gap:5px;border:0;background:#e5f1e4;color:#336b46;padding:8px 11px;border-radius:8px}
+.history-widget-pager{display:flex;align-items:center;justify-content:center;gap:12px;padding:13px}
+.history-widget-pager button{border:1px solid #dce7d9;border-radius:8px;padding:8px 12px;background:white;color:#3e6c4b;font-size:12px}
+.history-widget-pager button:disabled{opacity:.35}.history-widget-pager span{font-size:12px;color:#758677}
+.history-widget-note{font-size:11px;color:#87988c;line-height:1.5;margin:15px 0}
+@media(max-width:610px){.history-launch{padding:11px;gap:6px}.history-launch button{font-size:11px;max-width:112px}.history-widget-head h2{font-size:22px}.history-widget-head p{font-size:12px}.history-widget-head>strong{font-size:21px;min-width:50px;padding:11px}.history-widget-cta{flex-direction:column;align-items:stretch}.history-widget-filters select{width:112px}.history-widget-item summary{padding:9px 11px}}
