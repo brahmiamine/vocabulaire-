@@ -11,6 +11,20 @@ Les méthodes à plus forte utilité pour la mémoire incluent la pratique de r�
 
 **Note scientifique :** l'ordonnanceur inclus est une variante transparente et simplifiée de SM-2, et non l'algorithme FSRS. Les délais sont des heuristiques, pas une promesse de mémorisation parfaite.
 
+## Nouveau : devenir plus fluide à l'oral
+
+La méthode opérationnelle est un cycle **retrouver → écouter et répéter → improviser sa phrase → autoévaluer**, avec des séances courtes et cinq cartes au maximum. Les mots échus sont prioritaires. Les phrases personnelles sont enregistrées séparément dans `vocab_words.personal_example`, sans effacer l'exemple original ; elles sont visibles dans le carnet et pendant les révisions.
+
+Le mode vocal repose sur la reconnaissance native du navigateur, facultative : une transcription n'est pas une correction de grammaire ni une évaluation de prononciation. La saisie texte reste toujours possible. Le volet YouTube repliable inclut des contenus d'Easy French, d'innerFrench et un exercice de fluidité pour débuter.
+
+**Étapes recommandées :** environ 3 min de révisions, 5 min de production orale puis 2 min d'écoute et d'imitation sur un contenu authentique. Ce temps est un rythme de départ, pas un dosage scientifiquement validé.
+
+**Recherches :** [Kim & Webb (2022), méta-analyse de l'espacement](https://doi.org/10.1111/lang.12479) ; [enseignement des séquences toutes faites et fluidité orale](https://doi.org/10.1016/j.lingua.2021.103072) ; [retour d'expérience d'une personne ayant appris 5 000 mots](https://www.reddit.com/r/learnfrench/comments/1w080us/i_finished_the_5000_french_words_anki_deck/).
+
+**Architecture :** `src/pages` contient les écrans indépendants, `src/components/Common.jsx` les composants communs, `src/hooks/useVoiceInput.js` la transcription facultative, `src/fluency.js` le choix des cartes et la vérification limitée des expressions, `src/learning.js` la mémorisation. Le workflow GitHub Actions exécute les tests et la construction avant de déployer sur Pages.
+
+**Supabase :** la migration additive `supabase/migrations/20261017_vocabulary_personal_example.sql` a été appliquée à **abonnement**. Elle ne touche pas aux tables des autres applications. RLS reste actif.
+
 ## Fonctionnalités
 
 - Carnet de mots et expressions avec définition en français, traduction en **arabe littéraire**, phrase personnelle, catégorie, source et date d'apprentissage.
