@@ -12,7 +12,9 @@ import {
   addStarter, download, parseImport, mergeWords, toCsv
 } from '../data.js'
 import { Button, WordSpeaker, Empty, ratings, categories, fmt, dayKey, countToday } from '../components/Common.jsx'
-export function Library({words,onAdd,onEdit,onArchive,onImport,onExport,cloudImport,importRef,onStarter}) {
+import { HistoryWidget } from '../components/HistoryWidget.jsx'
+export function Library({words,onAdd,onEdit,onArchive,onImport,onExport,cloudImport,importRef,onStarter,onHistoryImport}) {
+  const [showHistory,setShowHistory]=useState(false)
   const [search,setSearch]=useState('')
   const [category,setCategory]=useState('Tous')
   const [period,setPeriod]=useState('Tous les jours')
@@ -25,8 +27,10 @@ export function Library({words,onAdd,onEdit,onArchive,onImport,onExport,cloudImp
     const matchesPeriod=period==='Tous les jours'||(period==="Aujourd'hui"&&diff===0)||(period==='Hier'&&diff===1)||(period==='7 derniers jours'&&diff>=0&&diff<7)
     return matchesPeriod&&(category==='Tous'||w.category===category)&&normalize(w.term+' '+w.meaning+' '+w.example).includes(normalize(search))
   }).sort((a,b)=>String(b.learned_on).localeCompare(String(a.learned_on))||new Date(b.created_at)-new Date(a.created_at))
+  if(showHistory)return <div className="page fade"><HistoryWidget existing={words} onImport={onHistoryImport} onClose={()=>setShowHistory(false)}/></div>
   return <div className="page fade">
     <div className="page-intro"><div><span className="eyebrow">TOUT TON VOCABULAIRE</span><h1>Mon carnet<span className="accent-dot">.</span></h1><p>Les mots que tu rencontres, gardés pour de bon.</p></div><Button onClick={onAdd}><Plus size={18}/> Ajouter un mot</Button></div>
+    <div className="history-launch"><div><strong>132 mots du 16 octobre</strong><small>Vocabulaire des discussions · arabe littéraire</small></div><button onClick={()=>setShowHistory(true)}>Voir et importer</button></div>
     <div className="library-toolbar"><div className="searchbox"><Search size={19}/><input aria-label="Rechercher un mot" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Rechercher un mot, un sens, un exemple…"/></div><select aria-label="Filtrer par catégorie" value={category} onChange={e=>setCategory(e.target.value)}><option>Tous</option>{categories.map(c=><option key={c}>{c}</option>)}</select><select aria-label="Filtrer par jour" value={period} onChange={e=>setPeriod(e.target.value)}>{["Tous les jours","Aujourd'hui","Hier","7 derniers jours"].map(p=><option key={p}>{p}</option>)}</select><button className="tool-btn" onClick={()=>importRef.current?.click()}><Upload size={17}/> Importer</button><button className="tool-btn" onClick={onExport}><Download size={17}/> Exporter</button></div>
     <div className="list-summary"><span><strong>{filtered.length}</strong> mot{filtered.length>1?'s':''} affiché{filtered.length>1?'s':''}</span><label className="toggle-archived"><input type="checkbox" checked={includeArchived} onChange={e=>setIncludeArchived(e.target.checked)}/> Voir les archivés</label></div>
     {filtered.length?<div className="word-list">{filtered.map((w,i)=><Fragment key={w.id}>{(i===0||filtered[i-1].learned_on!==w.learned_on)&&<div className="date-divider"><CalendarDays size={15}/>{new Date(w.learned_on+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</div>}<article className={'word-row '+(w.archived?'archived':'')}>
