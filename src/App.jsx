@@ -17,6 +17,10 @@ import { Review } from './pages/Review.jsx'
 import { Library } from './pages/Library.jsx'
 import { Boost } from './pages/Boost.jsx'
 import { Stats } from './pages/Stats.jsx'
+import { loadHistoryCatalog } from './historyCatalog.js'
+import { stageHistoryPack } from './historyUtils.js'
+
+const AUTO_HISTORY_KEY='motamot:auto-history-2026-10-16:v1'
 
 export default function App(){
   const [tab,setTab]=useState('home')
@@ -29,6 +33,7 @@ export default function App(){
   const [toast,setToast]=useState('')
   const [installEvent,setInstallEvent]=useState(null)
   const [showCloudTransfer,setShowCloudTransfer]=useState(true)
+  const [historyReady,setHistoryReady]=useState(false)
   const importRef=useRef(null)
   const toastTimer=useRef(null)
   const notify=msg=>{setToast(msg);clearTimeout(toastTimer.current);toastTimer.current=setTimeout(()=>setToast(''),4500)}
@@ -58,7 +63,24 @@ export default function App(){
     })
     return()=>{alive=false;subscription.unsubscribe()}
   },[])
-  useEffect(()=>{if(authReady&&!user)storeLocal(words,reviews)},[words,reviews,authReady,user])
+  useEffect(()=>{
+    if(!authReady||user)return
+    let cancelled=false
+    try{if(localStorage.getItem(AUTO_HISTORY_KEY)==='1')return}catch{return}
+    loadHistoryCatalog().then(items=>{
+      if(cancelled)return
+      setWords(current=>[...stageHistoryPack(current,items,new Date(Date.now()-1000)),...current])
+      setHistoryReady(true)
+    }).catch(err=>{if(!cancelled)notify('Chargement des mots impossible : '+err.message)})
+    return()=>{cancelled=true}
+  },[authReady,user])
+  useEffect(()=>{
+    if(!authReady||user)return
+    try{
+      storeLocal(words,reviews)
+      if(historyReady)localStorage.setItem(AUTO_HISTORY_KEY,'1')
+    }catch{notify('Stockage local indisponible : tes mots ne seront pas conservés après fermeture.')}
+  },[words,reviews,authReady,user,historyReady])
   const saveWord=async fields=>{
     const w=makeWord(fields)
     if(!w.term||!w.meaning){notify('Ajoute le mot et sa signification.');return}
