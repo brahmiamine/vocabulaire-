@@ -10,6 +10,7 @@ export const makeWord = (fields = {}) => ({
   meaning: (fields.meaning || '').trim(),
   translation_ar: (fields.translation_ar || '').trim(),
   example: (fields.example || '').trim(),
+  personal_example: (fields.personal_example || '').trim(),
   category: fields.category || 'Quotidien',
   source: fields.source || 'Personnel',
   learned_on: fields.learned_on || today(),

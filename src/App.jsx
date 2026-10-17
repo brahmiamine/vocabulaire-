@@ -15,7 +15,7 @@ import { Navigation, FormModal, LoginModal } from './components/Common.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
 import { Review } from './pages/Review.jsx'
 import { Library } from './pages/Library.jsx'
-import { Practice } from './pages/Practice.jsx'
+import { Boost } from './pages/Boost.jsx'
 import { Stats } from './pages/Stats.jsx'
 
 export default function App(){
@@ -68,6 +68,11 @@ export default function App(){
     setEditing(false)
     try{await putWord(w,user);notify('Mot enregistré !')}
     catch(e){notify('Sauvegarde cloud échouée : '+e.message)}
+  }
+  const savePersonalExample=async(w,phrase)=>{
+    const changed={...w,personal_example:phrase.trim().slice(0,500)}
+    setWords(current=>current.map(x=>x.id===w.id?changed:x))
+    try{await putWord(changed,user)}catch(e){notify('Synchronisation de la phrase impossible : '+e.message)}
   }
   const archiveWord=async w=>{
     const changed={...w,archived:!w.archived}
@@ -133,7 +138,7 @@ export default function App(){
       {tab==='home'&&<Dashboard words={words} reviews={reviews} onTab={setTab} onAdd={()=>setEditing({})} onStarter={starterImport} due={due.length}/>}
       {tab==='review'&&<Review due={due} all={activeWords} reviews={reviews} onRate={rate} onTab={setTab}/>}
       {tab==='library'&&<Library words={words} onAdd={()=>setEditing({})} onEdit={setEditing} onArchive={archiveWord} onImport={doImport} onExport={exportAll} cloudImport={!!user} importRef={importRef} onStarter={starterImport}/>}
-      {tab==='practice'&&<Practice words={words} onTab={setTab}/>}
+      {tab==='practice'&&<Boost words={words} onTab={setTab} onRate={rate} onPersonalExample={savePersonalExample}/>}
       {tab==='stats'&&<Stats words={words} reviews={reviews} onTab={setTab}/>}
       </main>
       <footer className="footer"><span>Mot à Mot · Construis ton français à ton rythme.</span><span>{user?'Sauvegarde Supabase':'Sauvegarde locale'} · PWA</span></footer>

@@ -87,7 +87,7 @@ export function mergeWords(existing,incoming){
   return {added,words:[...added,...existing]}
 }
 export function toCsv(words) {
-  const headers=['term','meaning','translation_ar','example','category','source','learned_on']
+  const headers=['term','meaning','translation_ar','example','personal_example','category','source','learned_on']
   const esc=v=>'"'+String(v??'').replaceAll('"','""')+'"'
   return [headers.join(','),...words.map(w=>headers.map(h=>esc(w[h])).join(','))].join('\r\n')
 }

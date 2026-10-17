@@ -351,3 +351,64 @@ main {width:100%;max-width:1440px;margin:0 auto;flex:1}
 .word-list> :last-child .word-row {border-bottom:0}
 .library-toolbar select {max-width:170px}
 @media(max-width:610px){.date-divider{font-size:10px;padding:10px}.library-toolbar select {flex:1;max-width:none}}
+
+
+/* Compact, focused oral workflow for mobile PWA */
+.boost-page{max-width:780px;margin:0 auto;padding-top:24px}
+.boost-heading{max-width:640px;margin:0 auto 15px}
+.boost-heading h1{font-size:29px;letter-spacing:-1px;margin:5px 0 13px}
+.boost-headline{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.boost-headline strong{font-size:12px;background:#e7f1e6;padding:7px 12px;border-radius:30px;color:#3a6b45;white-space:nowrap}
+.boost-track{height:6px;border-radius:9px;background:#e7ede5;overflow:hidden}
+.boost-track>div{height:100%;background:#5b9d65;transition:width .2s}
+.boost-steps{display:flex;justify-content:space-between;gap:6px;margin-top:12px}
+.boost-steps span{font-weight:750;font-size:10px;color:#91a395;white-space:nowrap}
+.boost-steps span.active{color:#2f6b47}
+.boost-card{max-width:640px;margin:auto;background:#fff;border:1px solid #e5ebe4;border-radius:17px;padding:27px;box-shadow:0 12px 28px #1c34240e}
+.boost-kicker{display:flex;align-items:center;gap:7px;color:#418755;text-transform:uppercase;font-size:11px;letter-spacing:.07em;font-weight:900;margin-bottom:13px}
+.boost-card h2{font-size:23px;line-height:1.27;color:#283d2e;margin:0 0 18px}
+.boost-cue{font-size:19px;line-height:1.5;padding:20px;background:#f1f6ef;border-radius:12px;color:#365642;margin-bottom:18px}
+.boost-card label{font-size:12px;font-weight:800;color:#517158;display:block;margin-bottom:7px}
+.boost-field{display:block;box-sizing:border-box;width:100%;border-radius:10px;border:1.5px solid #dce6d9;padding:13px 14px;background:#fff;color:#273d2e;font:inherit;font-size:14px;outline:none}
+.boost-field:focus{border-color:#79ac80;box-shadow:0 0 0 3px #72ac7820}
+.boost-hint{display:block;font-size:12px;color:#708276;line-height:1.6;margin:13px 0 16px}
+.boost-card .btn.full{display:flex;justify-content:center;width:100%;margin-top:16px;min-height:47px}
+.boost-ar{font-size:18px;color:#57725c}
+.boost-example{background:#f2f6ef;border-radius:12px;padding:17px;margin-bottom:15px}
+.boost-example small,.boost-personal small{display:block;color:#739076;font-size:10px;font-weight:900;letter-spacing:.08em}
+.boost-example p{font-size:18px;margin:6px 0 0}
+.boost-listen{display:flex;align-items:center;gap:9px;background:#e4f0e3;border:0;border-radius:10px;padding:12px 15px;color:#386a45;font-weight:800}
+.boost-term{display:flex;align-items:center;gap:10px;background:#f1f6ee;padding:13px;border-radius:11px;margin-bottom:14px}
+.boost-term strong{flex:1;color:#306444;font-size:19px}
+.boost-context{font-size:14px;color:#587060}
+.boost-voice{display:flex;align-items:center;gap:11px;margin:14px 0}
+.boost-voice button{width:49px;height:49px;border-radius:13px;background:#e0eee0;border:1px solid #c8ddc8;color:#2e6540;display:grid;place-items:center}
+.boost-voice button.recording{background:#fae5d9;color:#a45139}
+.boost-voice button:disabled{opacity:.5}
+.boost-voice span{color:#42664d;font-weight:800;font-size:13px}
+.boost-voice small{display:block;color:#88998c;font-weight:500}
+.boost-error{color:#ad4c40;font-size:12px}
+.boost-capture{background:#f1f7ee;padding:11px;border-radius:9px;font-size:13px}
+.boost-skip,.boost-back{display:flex;align-items:center;justify-content:center;gap:5px;background:none;border:0;color:#69806f;text-decoration:underline;margin:12px auto 0;font-size:12px}
+.boost-grades{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.boost-personal{background:#f1f6ee;padding:14px;border-radius:10px;line-height:1.6;color:#436249}
+.boost-resources{max-width:640px;background:#f1f5ef;border-radius:11px;margin:14px auto 0;padding:12px 16px;color:#59715f;font-size:12px}
+.boost-resources summary{cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:800;list-style:none}
+.boost-resources p{line-height:1.5}
+.boost-resources a{display:block;padding:8px 0;color:#356f48}
+.boost-finish{text-align:center;background:#fff;border-radius:16px;padding:35px 20px;max-width:640px;margin:auto}
+.boost-finish svg{color:#60a874}
+@media(max-width:610px){
+ .boost-page{padding:16px 13px 96px}
+ .boost-heading h1{font-size:22px;margin:3px 0 11px}
+ .boost-heading{margin-bottom:11px}
+ .boost-steps span{font-size:9px}
+ .boost-card{padding:19px 17px}
+ .boost-card h2{font-size:20px}
+ .boost-cue{font-size:17px;padding:15px}
+ .boost-grades{gap:4px}
+ .boost-grades .grade{min-width:0;padding:6px 1px}
+ .hero{min-height:225px}
+ .stat-card{min-height:121px}
+ .section-head{margin-top:23px}
+}
