@@ -31,6 +31,13 @@ export async function putWord(word, user) {
   const {error} = await supabase.from('vocab_words').upsert({...word,user_id:user.id})
   if (error) throw error
 }
+export async function putWords(words,user){
+  if(!user||!supabase||!words.length)return
+  for(let i=0;i<words.length;i+=100){
+    const {error}=await supabase.from('vocab_words').upsert(words.slice(i,i+100).map(w=>({...w,user_id:user.id})))
+    if(error)throw error
+  }
+}
 export async function putReview(review, user) {
   if (!user || !supabase) return
   const {error} = await supabase.from('vocab_reviews').insert({...review,user_id:user.id})
