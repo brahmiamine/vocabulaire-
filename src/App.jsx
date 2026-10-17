@@ -128,7 +128,7 @@ function Review({due,all,reviews,onRate,onTab}) {
   const [result,setResult]=useState(null)
   const word=due[0]
   useEffect(()=>{setShow(false);setTyped('');setResult(null)},[word?.id])
-  const reveal=()=>{setShow(true);if(typed.trim())setResult(normalize(typed)===normalize(word.term))}
+  const reveal=()=>{setShow(true);if(typed.trim() && direction==='meaning')setResult(normalize(typed)===normalize(word.term))}
   const grade=rating=>{onRate(word,rating,'review');setShow(false);setTyped('');setResult(null)}
   return <div className="page narrow-page fade">
     <div className="page-intro"><div><span className="eyebrow">MÉMOIRE À LONG TERME</span><h1>Mes révisions<span className="accent-dot">.</span></h1><p>Essaye de te souvenir avant de regarder. Même une erreur aide à apprendre.</p></div><span className="top-icon"><Layers3 size={26}/></span></div>
@@ -240,6 +240,7 @@ export default function App(){
   const [showAuth,setShowAuth]=useState(false)
   const [toast,setToast]=useState('')
   const [installEvent,setInstallEvent]=useState(null)
+  const [showCloudTransfer,setShowCloudTransfer]=useState(true)
   const importRef=useRef(null)
   const toastTimer=useRef(null)
   const notify=msg=>{setToast(msg);clearTimeout(toastTimer.current);toastTimer.current=setTimeout(()=>setToast(''),4500)}
@@ -351,7 +352,7 @@ export default function App(){
     <input type="file" ref={importRef} accept=".json,.csv,text/csv,application/json" onChange={doImport} hidden/>
     {editing!==false&&<FormModal initial={editing} onClose={()=>setEditing(false)} onSave={saveWord}/>}
     {showAuth&&supabase&&<LoginModal onClose={()=>setShowAuth(false)} onToast={notify}/>}
-    {user&&tab==='home'&&localWords().length>0&&<div className="cloud-transfer"><Cloud size={18}/><span>Tu as aussi des mots enregistrés localement.</span><button onClick={cloudLocalImport}>Les importer dans Supabase <ArrowRight size={15}/></button><button aria-label="Masquer" onClick={()=>{storeLocal([],localReviews());notify('Les mots locaux ont été masqués sur cet appareil.')}}><X size={15}/></button></div>}
+    {user&&tab==='home'&&showCloudTransfer&&localWords().length>0&&<div className="cloud-transfer"><Cloud size={18}/><span>Tu as aussi des mots enregistrés localement.</span><button onClick={cloudLocalImport}>Les importer dans Supabase <ArrowRight size={15}/></button><button aria-label="Masquer" onClick={()=>setShowCloudTransfer(false)}><X size={15}/></button></div>}
     {toast&&<div className="toast" role="status"><Info size={18}/>{toast}<button onClick={()=>setToast('')} aria-label="Fermer"><X size={16}/></button></div>}
   </div>
 }
