@@ -27,7 +27,7 @@ export const ratings = [
 export const fmt = (date) => new Date(date).toLocaleDateString('fr-FR',{day:'numeric',month:'short'})
 export const dayKey = (date) => new Date(date).toLocaleDateString('en-CA')
 export const countToday = events => events.filter(e=>dayKey(e.reviewed_at)===today()).length
-const categories=['Quotidien','Expressions','Travail','Voyage','Grammaire','Autres']
+export const categories=['Quotidien','Expressions','Travail','Voyage','Grammaire','Autres']
 export const Button = ({children,onClick,variant='primary',className='',disabled=false,type='button'}) =>
   <button className={'btn '+variant+' '+className} onClick={onClick} disabled={disabled} type={type}>{children}</button>
 export function WordSpeaker({text,compact=false}) {
