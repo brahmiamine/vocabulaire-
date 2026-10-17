@@ -38,24 +38,23 @@ npm test
 npm run build
 ```
 
-Sans variables Supabase, l'application fonctionne **localement** via `localStorage`. Ce stockage est propre au navigateur et peut disparaître si les données du navigateur sont effacées ; exporter régulièrement du JSON.
+Sans configuration Supabase (en développement), l'application fonctionne **localement** via `localStorage`. Ce stockage est propre au navigateur et peut disparaître si les données du navigateur sont effacées ; exporter régulièrement du JSON.
 
-## Configurer un nouveau projet Supabase (recommandé)
+## Base Supabase existante : abonnement
 
-**Ne pas réutiliser les bases d'autres applications sans décision explicite.**
+Cette application utilise désormais le projet Supabase **abonnement** (`nkcvffmgosvipnxcttms`), partagé avec plusieurs autres applications. Deux tables isolées ont été ajoutées **sans modifier les tables existantes** : `public.vocab_words` et `public.vocab_reviews`.
 
-1. Créer un projet Supabase dédié, puis appliquer `supabase/migrations/20261017_vocabulary.sql` via l'éditeur SQL ou une migration.
-2. Sous Authentication > Providers, activer Email (lien de connexion).
-3. Sous Authentication > URL Configuration, définir comme **Site URL** : `https://brahmiamine.github.io/vocabulaire-/`, et ajouter cette URL aux **Redirect URLs**.
-4. Récupérer l'URL de projet et une **publishable key** (`sb_publishable_...`) ; ne jamais utiliser une `service_role`/secret key dans un frontend.
-5. Localement, créer `.env.local` :
-```
-VITE_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
-VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_xxxxx
-```
-6. Pour GitHub Actions, ouvrir **Settings → Secrets and variables → Actions → Variables**, et ajouter `VITE_SUPABASE_URL` et `VITE_SUPABASE_PUBLISHABLE_KEY` avec leurs valeurs **publiables**. Un commit vers `main` déclenche un nouveau build.
+- Les deux tables ont RLS activé : chaque utilisateur authentifié n'accède qu'à ses propres mots et révisions.
+- La connexion au cloud est facultative, depuis l'icône « Sur cet appareil » en haut de l'application.
+- Le site GitHub Pages utilise l'URL Supabase et une clé **publishable** de navigateur, stockées dans `.env.production`. La clé n'est PAS une clé secrète et ne permet pas de contourner les politiques RLS.
+- Pour fonctionner sur les autres appareils, ouvrir [Authentication → URL Configuration](https://supabase.com/dashboard/project/nkcvffmgosvipnxcttms/auth/url-configuration) et **ajouter seulement** `https://brahmiamine.github.io/vocabulaire-/**` aux **Redirect URLs**. **Ne pas remplacer** la Site URL globale de la base partagée : les autres applications pourraient en dépendre.
+- Vérifier que le fournisseur Email est activé dans Authentication. Cliquer sur « Sur cet appareil » puis entrer son e-mail afin de recevoir un lien de connexion. Le lien doit être ouvert sur le même navigateur/appareil.
+- Les mots stockés en local ne sont pas envoyés automatiquement vers le cloud. Après connexion, l'application peut proposer de les importer.
+- En développement local, créer `.env.local` (voir `.env.example`) avec les mêmes valeurs publiques de connexion. Il n'est pas nécessaire de partager une clé `service_role`.
 
-Les autorisations RLS restrictives sont présentes dans le SQL. Ne pas désactiver RLS. Tester avec deux comptes différents avant d'importer des données sensibles.
+Le schéma SQL est conservé dans `supabase/migrations/20261017_vocabulary.sql` pour référence. **Il a déjà été appliqué** dans `abonnement` et ne doit pas être relancé manuellement sans besoin de migration.
+
+Règles de sécurité officielles : https://supabase.com/docs/guides/database/postgres/row-level-security
 
 ## Déployer sur GitHub Pages
 

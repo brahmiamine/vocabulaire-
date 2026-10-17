@@ -1,4 +1,4 @@
--- Migration Mot à Mot. Apply once in a dedicated Supabase project.
+-- Migration Mot à Mot. Applied to the shared abonnement Supabase project; all changes are scoped to vocab_* tables.
 -- Authenticated users can only access their own vocabulary and review history.
 create extension if not exists pgcrypto;
 create table if not exists public.vocab_words (
