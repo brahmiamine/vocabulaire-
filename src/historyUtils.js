@@ -14,3 +14,14 @@ export function prepareHistoryImport(existing, catalog) {
   }
   return added
 }
+
+/** Automatically start a manageable review queue; all terms stay visible in the library. */
+export function stageHistoryPack(existing,catalog,at=new Date(),perDay=8){
+  const batchSize=Number.isInteger(perDay)&&perDay>0?perDay:8
+  const start=at instanceof Date ? at.getTime() : new Date(at).getTime()
+  if(!Number.isFinite(start))return []
+  return prepareHistoryImport(existing,catalog).map((word,index)=>({
+    ...word,
+    due_at:new Date(start+Math.floor(index/batchSize)*86400000).toISOString()
+  }))
+}
