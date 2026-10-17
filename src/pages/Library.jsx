@@ -15,6 +15,10 @@ import { Button, WordSpeaker, Empty, ratings, categories, fmt, dayKey, countToda
 import { HistoryWidget } from '../components/HistoryWidget.jsx'
 export function Library({words,onAdd,onEdit,onArchive,onImport,onExport,cloudImport,importRef,onStarter,onHistoryImport}) {
   const [showHistory,setShowHistory]=useState(false)
+  const importHistory=async entries=>{
+    const file=new File([JSON.stringify(entries)],'vocabulaire-16-10-2026.json',{type:'application/json'})
+    await onImport({target:{files:[file],value:''}})
+  }
   const [search,setSearch]=useState('')
   const [category,setCategory]=useState('Tous')
   const [period,setPeriod]=useState('Tous les jours')
@@ -27,7 +31,7 @@ export function Library({words,onAdd,onEdit,onArchive,onImport,onExport,cloudImp
     const matchesPeriod=period==='Tous les jours'||(period==="Aujourd'hui"&&diff===0)||(period==='Hier'&&diff===1)||(period==='7 derniers jours'&&diff>=0&&diff<7)
     return matchesPeriod&&(category==='Tous'||w.category===category)&&normalize(w.term+' '+w.meaning+' '+w.example).includes(normalize(search))
   }).sort((a,b)=>String(b.learned_on).localeCompare(String(a.learned_on))||new Date(b.created_at)-new Date(a.created_at))
-  if(showHistory)return <div className="page fade"><HistoryWidget existing={words} onImport={onHistoryImport} onClose={()=>setShowHistory(false)}/></div>
+  if(showHistory)return <div className="page fade"><HistoryWidget existing={words} onImport={importHistory} onClose={()=>setShowHistory(false)}/></div>
   return <div className="page fade">
     <div className="page-intro"><div><span className="eyebrow">TOUT TON VOCABULAIRE</span><h1>Mon carnet<span className="accent-dot">.</span></h1><p>Les mots que tu rencontres, gardés pour de bon.</p></div><Button onClick={onAdd}><Plus size={18}/> Ajouter un mot</Button></div>
     <div className="history-launch"><div><strong>132 mots du 16 octobre</strong><small>Vocabulaire des discussions · arabe littéraire</small></div><button onClick={()=>setShowHistory(true)}>Voir et importer</button></div>
